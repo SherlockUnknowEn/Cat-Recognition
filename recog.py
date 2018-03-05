@@ -166,18 +166,33 @@ def predict(X, parameters):
     return p
 
 
-script, path = argv
-print(path)
-image = np.array(ndimage.imread(path, flatten=False))
-num_px = 64
-f = open('params.obj', 'rb')
-parameters = pickle.load(f)
-f.close()
-print(parameters.keys())
-my_image = scipy.misc.imresize(image, size=(num_px, num_px)).reshape((num_px * num_px * 3, 1))
-my_predicted_image = predict(my_image, parameters)
-print(my_predicted_image)
-if my_predicted_image == 1:
-    print('这是猫')
-else:
-    print('这不是猫')
+# script, path = argv
+# print(path)
+# image = np.array(ndimage.imread(path, flatten=False))
+# num_px = 64
+# f = open('params.obj', 'rb')
+# parameters = pickle.load(f)
+# f.close()
+# print(parameters.keys())
+# my_image = scipy.misc.imresize(image, size=(num_px, num_px)).reshape((num_px * num_px * 3, 1))
+# my_predicted_image = predict(my_image, parameters)
+# print(my_predicted_image)
+# if my_predicted_image == 1:
+#     print('这是猫')
+# else:
+#     print('这不是猫')
+
+def recog(path):
+    image = np.array(ndimage.imread(path, flatten=False))
+    num_px = 64
+    f = open('params.obj', 'rb')
+    parameters = pickle.load(f)
+    f.close()
+    print(parameters.keys())
+    my_image = scipy.misc.imresize(image, size=(num_px, num_px)).reshape((num_px * num_px * 3, 1))
+    my_predicted_image = predict(my_image, parameters)
+    print(my_predicted_image)
+    if my_predicted_image == 1:
+        return True
+    else:
+        return False
